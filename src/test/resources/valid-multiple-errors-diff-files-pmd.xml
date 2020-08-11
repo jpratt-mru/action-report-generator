@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 http://pmd.sourceforge.net/report_2_0_0.xsd" version="6.26.0" timestamp="2020-08-10T20:11:55.934">
+<file name="C:\__eclipse_home_teacher\_____1501-my-drills\_just_vscode_project_in_eclipse\src\main\DrillUtil.java">
+<violation beginline="4" endline="4" begincolumn="9" endcolumn="12" rule="UnconditionalIfStatement" ruleset="Error Prone" class="DrillUtil" method="printPrompt" externalInfoUrl="https://pmd.github.io/pmd-6.26.0/pmd_rules_java_errorprone.html#unconditionalifstatement" priority="3">
+Do not use if statements that are always true or always false
+</violation>
+<violation beginline="4" endline="4" begincolumn="15" endcolumn="40" rule="ControlStatementBraces" ruleset="Code Style" class="DrillUtil" method="printPrompt" externalInfoUrl="https://pmd.github.io/pmd-6.26.0/pmd_rules_java_codestyle.html#controlstatementbraces" priority="3">
+This statement should have braces
+</violation>
+</file>
+<file name="C:\__eclipse_home_teacher\_____1501-my-drills\_just_vscode_project_in_eclipse\src\main\Main.java">
+<violation beginline="4" endline="4" begincolumn="9" endcolumn="16" rule="UnusedLocalVariable" ruleset="Best Practices" class="Main" method="main" variable="BAD_NAME" externalInfoUrl="https://pmd.github.io/pmd-6.26.0/pmd_rules_java_bestpractices.html#unusedlocalvariable" priority="3">
+Avoid unused local variables such as 'BAD_NAME'.
+</violation>
+<violation beginline="4" endline="4" begincolumn="9" endcolumn="16" rule="LocalVariableNamingConventions" ruleset="Code Style" class="Main" method="main" variable="BAD_NAME" externalInfoUrl="https://pmd.github.io/pmd-6.26.0/pmd_rules_java_codestyle.html#localvariablenamingconventions" priority="1">
+The local variable name 'BAD_NAME' doesn't match '[a-z][a-zA-Z0-9]*'
+</violation>
+<violation beginline="4" endline="4" begincolumn="9" endcolumn="12" rule="UnconditionalIfStatement" ruleset="Error Prone" class="DrillUtil" method="printPrompt" externalInfoUrl="https://pmd.github.io/pmd-6.26.0/pmd_rules_java_errorprone.html#unconditionalifstatement" priority="3">
+Do not use if statements that are always true or always false
+</violation>
+</file>
+</pmd>
