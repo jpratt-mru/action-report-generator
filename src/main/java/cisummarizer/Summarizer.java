@@ -9,4 +9,6 @@ public class Summarizer {
 
   public void add(SummarizingParser parser) { // TODO Auto-generated method stub
   }
+
+  public void add(Summary summary) {}
 }

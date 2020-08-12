@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="8.34">
+<file name="C:\__eclipse_home_teacher\_____1501-my-drills\_just_vscode_project_in_eclipse\src\main\DrillUtil.java">
+</file>
+<file name="C:\__eclipse_home_teacher\_____1501-my-drills\_just_vscode_project_in_eclipse\src\main\Main.java">
+<error line="4" column="9" severity="error" message="Local variable name &apos;bad_name&apos; must match pattern &apos;^[a-z]([a-z0-9][a-zA-Z0-9]*)?$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.LocalVariableNameCheck"/>
+</file>
+</checkstyle>

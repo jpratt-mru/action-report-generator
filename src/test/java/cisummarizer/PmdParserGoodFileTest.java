@@ -2,16 +2,12 @@ package cisummarizer;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
 
 public class PmdParserGoodFileTest {
 
@@ -24,12 +20,10 @@ public class PmdParserGoodFileTest {
   }
 
   @Test
-  @DisplayName("it should return a checkstyle summary with no problems detected if xml says so")
-  public void it_should_return_checkstyle_summary_with_no_problems_detected_when_xml_says_so()
-      throws IOException {
+  @DisplayName("it should return a pmd summary with no problems detected if xml says so")
+  public void it_should_return_pmd_summary_with_no_problems_detected_when_xml_says_so() {
 
     Path validNoErrorsFile = RESOURCE_DIR.resolve("valid-no-error-pmd.xml");
-
     SummaryResult result = parserUnderTest.parse(validNoErrorsFile);
 
     assertThat(result).isInstanceOf(PmdSummaryResult.class);
@@ -38,14 +32,11 @@ public class PmdParserGoodFileTest {
   }
 
   @Test
-  @DisplayName(
-      "it should return a checkstyle summary with problems detected if xml has one problem")
-  public void it_should_return_checkstyle_summary_with_problems_detected_when_xml_has_one_problems()
-      throws IOException {
+  @DisplayName("it should return a pmd summary with problems detected if xml has one problem")
+  public void it_should_return_pmd_summary_with_problems_detected_when_xml_has_one_problems() {
 
-    Path validNoErrorsFile = RESOURCE_DIR.resolve("valid-one-error-pmd.xml");
-
-    SummaryResult result = parserUnderTest.parse(validNoErrorsFile);
+    Path oneErrorFile = RESOURCE_DIR.resolve("valid-one-error-pmd.xml");
+    SummaryResult result = parserUnderTest.parse(oneErrorFile);
 
     assertThat(result).isInstanceOf(PmdSummaryResult.class);
     assertThat(result.hasProblems()).isTrue();
@@ -54,14 +45,13 @@ public class PmdParserGoodFileTest {
 
   @Test
   @DisplayName(
-      "it should return a checkstyle summary with problems detected if xml has multiple problems in different files")
+      "it should return a pmd summary with problems only once and in alphabetical order if xml has multiple problems in different files")
   public void
-      it_should_return_checkstyle_summary_with_problems_detected_when_xml_has_multiple_problems_in_different_files()
-          throws IOException {
+      it_should_return_pmd_summary_with_problems_only_once_and_in_alphabetic_order_when_xml_has_multiple_problems_in_different_files() {
 
-    Path validNoErrorsFile = RESOURCE_DIR.resolve("valid-multiple-errors-diff-files-pmd.xml");
-
-    SummaryResult result = parserUnderTest.parse(validNoErrorsFile);
+    Path validFileMultipleRepeatedErrors =
+        RESOURCE_DIR.resolve("valid-multiple-errors-diff-files-pmd.xml");
+    SummaryResult result = parserUnderTest.parse(validFileMultipleRepeatedErrors);
 
     assertThat(result).isInstanceOf(PmdSummaryResult.class);
     assertThat(result.hasProblems()).isTrue();
