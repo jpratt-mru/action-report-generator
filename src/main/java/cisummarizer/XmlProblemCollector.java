@@ -70,7 +70,8 @@ public abstract class XmlProblemCollector implements ProblemCollector {
       org.w3c.dom.Document w3cdoc = builder.parse(Files.newInputStream(path));
       document = new DOMBuilder().build(w3cdoc);
     } catch (SAXException | ParserConfigurationException | IOException e) {
-      System.err.println(e);
+      System.err.println("something went south with " + path);
+      System.err.println("   here is the exception: " + e);
     }
     return document;
   }

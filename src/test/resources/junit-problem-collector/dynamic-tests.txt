@@ -1,0 +1,82 @@
+.
++-- JUnit Jupiter [OK]
+| +-- DrillUtilTest [OK]
+| | +-- when you call printTopGrosser, it should print the expected movie info [OK]
+| | +-- when you call printSpacer, it should print two newlines [OK]
+| | +-- when you call printRiddle, it should print the expected riddle with a tabbed ans... [OK]
+| | '-- when you call printPrompt, it should print the expected prompt [OK]
+| +-- MainTest [OK]
+| | '-- when you call main, it should print the expected lines [OK]
+| +-- FooTest [OK]
+| | '-- when you call main, it should print the expected lines [OK]
+| '-- DynamicTest [OK]
+|   '-- dynamicTests() [OK]
+|     +-- string a [X] 
+|     |     Expecting:
+|     |      <"a">
+|     |     to be equal to:
+|     |      <"b">
+|     |     but was not.
+|     +-- string b [OK]
+|     '-- string c [X] 
+|           Expecting:
+|            <"c">
+|           to be equal to:
+|            <"b">
+|           but was not.
+'-- JUnit Vintage [OK]
+
+Failures (2):
+  JUnit Jupiter:DynamicTest:dynamicTests():string a
+    MethodSource [className = 'DynamicTest', methodName = 'dynamicTests', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: 
+Expecting:
+ <"a">
+to be equal to:
+ <"b">
+but was not.
+       java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+       java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+       java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+       java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:500)
+       DynamicTest.lambda$1(DynamicTest.java:18)
+       org.junit.jupiter.engine.descriptor.DynamicTestTestDescriptor.lambda$execute$0(DynamicTestTestDescriptor.java:52)
+       org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131)
+       org.junit.jupiter.api.extension.InvocationInterceptor.interceptDynamicTest(InvocationInterceptor.java:161)
+       org.junit.jupiter.engine.descriptor.DynamicTestTestDescriptor.lambda$execute$1(DynamicTestTestDescriptor.java:58)
+       org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptorCall.lambda$ofVoid$0(InvocationInterceptorChain.java:78)
+       [...]
+  JUnit Jupiter:DynamicTest:dynamicTests():string c
+    MethodSource [className = 'DynamicTest', methodName = 'dynamicTests', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: 
+Expecting:
+ <"c">
+to be equal to:
+ <"b">
+but was not.
+       java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+       java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+       java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+       java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:500)
+       DynamicTest.lambda$1(DynamicTest.java:18)
+       org.junit.jupiter.engine.descriptor.DynamicTestTestDescriptor.lambda$execute$0(DynamicTestTestDescriptor.java:52)
+       org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131)
+       org.junit.jupiter.api.extension.InvocationInterceptor.interceptDynamicTest(InvocationInterceptor.java:161)
+       org.junit.jupiter.engine.descriptor.DynamicTestTestDescriptor.lambda$execute$1(DynamicTestTestDescriptor.java:58)
+       org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptorCall.lambda$ofVoid$0(InvocationInterceptorChain.java:78)
+       [...]
+
+Test run finished after 319 ms
+[         7 containers found      ]
+[         0 containers skipped    ]
+[         7 containers started    ]
+[         0 containers aborted    ]
+[         7 containers successful ]
+[         0 containers failed     ]
+[         9 tests found           ]
+[         0 tests skipped         ]
+[         9 tests started         ]
+[         0 tests aborted         ]
+[         7 tests successful      ]
+[         2 tests failed          ]
+

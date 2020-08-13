@@ -1,0 +1,136 @@
+.
++-- JUnit Jupiter [OK]
+| +-- DrillUtilTest [OK]
+| | +-- when you call printTopGrosser, it should print the expected movie info [OK]
+| | +-- when you call printSpacer, it should print two newlines [OK]
+| | +-- when you call printRiddle, it should print the expected riddle with a tabbed ans... [OK]
+| | '-- when you call printPrompt, it should print the expected prompt [OK]
+| +-- MainTest [OK]
+| | '-- when you call main, it should print the expected lines [OK]
+| +-- a nested test - outermost [OK]
+| | +-- an outer level test [X] 
+| | |     Expecting:
+| | |      <false>
+| | |     to be equal to:
+| | |      <true>
+| | |     but was not.
+| | +-- a nesting [OK]
+| | | +-- nest one failing test [X] 
+| | | |     Expecting:
+| | | |      <"foo">
+| | | |     to be equal to:
+| | | |      <"FOO">
+| | | |     but was not.
+| | | +-- nest one passing test [OK]
+| | | '-- nesting in nesting [OK]
+| | |   +-- nested nested failing test [X] 
+| | |   |     Expecting:
+| | |   |      <"foo">
+| | |   |     to be equal to:
+| | |   |      <"FOO">
+| | |   |     but was not.
+| | |   '-- nested nested passing test [OK]
+| | '-- another nesting [OK]
+| |   +-- nest two failing test [X] 
+| |   |     Expecting:
+| |   |      <"foo">
+| |   |     to be equal to:
+| |   |      <"FOO">
+| |   |     but was not.
+| |   '-- nest two passing test [OK]
+| '-- FooTest [OK]
+|   '-- when you call main, it should print the expected lines [OK]
+'-- JUnit Vintage [OK]
+
+Failures (4):
+  JUnit Jupiter:a nested test - outermost:an outer level test
+    MethodSource [className = 'NestedTest', methodName = 'outer_level_test', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: 
+Expecting:
+ <false>
+to be equal to:
+ <true>
+but was not.
+       java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+       java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+       java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+       java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:500)
+       NestedTest.outer_level_test(NestedTest.java:15)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+       java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+       java.base/java.lang.reflect.Method.invoke(Method.java:564)
+       org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:688)
+       [...]
+  JUnit Jupiter:a nested test - outermost:a nesting:nest one failing test
+    MethodSource [className = 'NestedTest$NestOne', methodName = 'nest_one_failing', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: 
+Expecting:
+ <"foo">
+to be equal to:
+ <"FOO">
+but was not.
+       java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+       java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+       java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+       java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:500)
+       NestedTest$NestOne.nest_one_failing(NestedTest.java:31)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+       java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+       java.base/java.lang.reflect.Method.invoke(Method.java:564)
+       org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:688)
+       [...]
+  JUnit Jupiter:a nested test - outermost:a nesting:nesting in nesting:nested nested failing test
+    MethodSource [className = 'NestedTest$NestOne$NestedNested', methodName = 'nested_nested_failing', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: 
+Expecting:
+ <"foo">
+to be equal to:
+ <"FOO">
+but was not.
+       java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+       java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+       java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+       java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:500)
+       NestedTest$NestOne$NestedNested.nested_nested_failing(NestedTest.java:46)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+       java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+       java.base/java.lang.reflect.Method.invoke(Method.java:564)
+       org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:688)
+       [...]
+  JUnit Jupiter:a nested test - outermost:another nesting:nest two failing test
+    MethodSource [className = 'NestedTest$NestTwo', methodName = 'nest_two_failing', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: 
+Expecting:
+ <"foo">
+to be equal to:
+ <"FOO">
+but was not.
+       java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+       java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+       java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+       java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:500)
+       NestedTest$NestTwo.nest_two_failing(NestedTest.java:63)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+       java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+       java.base/java.lang.reflect.Method.invoke(Method.java:564)
+       org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:688)
+       [...]
+
+Test run finished after 372 ms
+[         9 containers found      ]
+[         0 containers skipped    ]
+[         9 containers started    ]
+[         0 containers aborted    ]
+[         9 containers successful ]
+[         0 containers failed     ]
+[        13 tests found           ]
+[         0 tests skipped         ]
+[        13 tests started         ]
+[         0 tests aborted         ]
+[         9 tests successful      ]
+[         4 tests failed          ]
+

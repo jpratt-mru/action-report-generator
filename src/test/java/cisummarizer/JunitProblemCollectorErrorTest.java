@@ -10,13 +10,12 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class CheckstyleProblemCollectorErrorTest {
+public class JunitProblemCollectorErrorTest {
 
-  private static final Path RESOURCE_DIR =
-      Paths.get("src/test/resources/checkstyle-problem-collector");
+  private static final Path RESOURCE_DIR = Paths.get("src/test/resources/junit-problem-collector");
 
   public static Stream<String> filesWithInvalidData() {
-    return Stream.of("blorp", "empty.xml", "malformed.xml", "valid-xml-but-not-checkstyle.xml");
+    return Stream.of("blorp", "empty.txt", "malformed.txt", "incomplete-junit-file.txt");
   }
 
   @Test
@@ -29,7 +28,7 @@ public class CheckstyleProblemCollectorErrorTest {
   public void it_should_have_no_problems_but_have_errors_when_given_a_path_to_bad_file(
       String fileName) {
     Path path = RESOURCE_DIR.resolve(fileName);
-    ProblemCollector collector = new CheckstyleProblemCollector(path);
+    ProblemCollector collector = new JunitProblemCollector(path);
 
     assertThat(collector.problems()).isEmpty();
     assertThat(collector.hasProblems()).isFalse();

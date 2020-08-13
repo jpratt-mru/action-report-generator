@@ -31,6 +31,7 @@ public class PmdProblemCollectorErrorTest {
     ProblemCollector collector = new PmdProblemCollector(path);
 
     assertThat(collector.problems()).isEmpty();
+    assertThat(collector.hasProblems()).isFalse();
     assertThat(collector.hasError()).isTrue();
   }
 }

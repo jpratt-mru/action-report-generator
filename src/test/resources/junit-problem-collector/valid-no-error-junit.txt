@@ -1,0 +1,27 @@
+.
++-- JUnit Jupiter [OK]
+| +-- DrillUtilTest [OK]
+| | +-- when you call printTopGrosser, it should print the expected movie info [OK]
+| | +-- when you call printSpacer, it should print two newlines [OK]
+| | +-- when you call printRiddle, it should print the expected riddle with a tabbed ans... [OK]
+| | '-- when you call printPrompt, it should print the expected prompt [OK]
+| +-- MainTest [OK]
+| | '-- when you call main, it should print the expected lines [OK]
+| '-- FooTest [OK]
+|   '-- when you call main, it should print the expected lines [OK]
+'-- JUnit Vintage [OK]
+
+Test run finished after 280 ms
+[         5 containers found      ]
+[         0 containers skipped    ]
+[         5 containers started    ]
+[         0 containers aborted    ]
+[         5 containers successful ]
+[         0 containers failed     ]
+[         6 tests found           ]
+[         0 tests skipped         ]
+[         6 tests started         ]
+[         0 tests aborted         ]
+[         6 tests successful      ]
+[         0 tests failed          ]
+

@@ -1,8 +1,8 @@
 package cisummarizer;
 
-public class Summary {
+public interface Summary {
 
-  public Summary(ProblemCollector pmdCollector, Presenter passFailPresenter) {
-    // TODO Auto-generated constructor stub
-  }
+  String problemNumber();
+
+  String problemSummary();
 }
