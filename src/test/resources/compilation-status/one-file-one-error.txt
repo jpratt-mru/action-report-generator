@@ -1,0 +1,6 @@
+src\main\Main.java:4: error: cannot find symbol
+    in bad_name = 3;
+    ^
+  symbol:   class in
+  location: class Main
+1 error
