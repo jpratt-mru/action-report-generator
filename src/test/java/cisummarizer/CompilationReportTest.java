@@ -8,7 +8,7 @@ import java.nio.file.Paths;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class CompilationStatusReportTest {
+public class CompilationReportTest {
 
   private static final Path RESOURCE_DIR = Paths.get("src/test/resources/compilation-status");
 
@@ -20,9 +20,22 @@ public class CompilationStatusReportTest {
   }
 
   @Test
+  @DisplayName("when there's an error with the junit result, the report should show that")
+  public void compilation_status_report_when_error_with_junit_result() {
+    getReportFor("foo.txt");
+
+    assertThat(report).hasHeader("[compilation]");
+    assertThat(report.summary()).isEqualTo("something bad happened:");
+    assertThat(report.problemDescriptions())
+        .containsExactly(
+            "|",
+            "|-- java.nio.file.NoSuchFileException: src\\test\\resources\\compilation-status\\foo.txt");
+  }
+
+  @Test
   @DisplayName("compilation status report for no compilation problems")
   public void compilation_status_report_for_no_compilation_problems() {
-    getReportFor("empty.txt");
+    getReportFor("no-errors.txt");
 
     assertThat(report).hasHeader("[compilation]");
     assertThat(report.summary()).isEqualTo("no compilation problems");
@@ -36,7 +49,7 @@ public class CompilationStatusReportTest {
 
     assertThat(report).hasHeader("[compilation]");
     assertThat(report.summary()).isEqualTo("1 file did not compile:");
-    assertThat(report.problemDescriptions()).containsExactly("|-- src/main/Main.java");
+    assertThat(report.problemDescriptions()).containsExactly("|", "|-- src/main/Main.java");
   }
 
   @Test
@@ -46,7 +59,7 @@ public class CompilationStatusReportTest {
 
     assertThat(report).hasHeader("[compilation]");
     assertThat(report.summary()).isEqualTo("1 file did not compile:");
-    assertThat(report.problemDescriptions()).containsExactly("|-- src/main/DrillUtil.java");
+    assertThat(report.problemDescriptions()).containsExactly("|", "|-- src/main/DrillUtil.java");
   }
 
   @Test
@@ -58,6 +71,7 @@ public class CompilationStatusReportTest {
     assertThat(report.summary()).isEqualTo("5 files did not compile:");
     assertThat(report.problemDescriptions())
         .containsExactly(
+            "|",
             "|-- src/main/DrillUtil.java",
             "|-- src/main/LameUtility.java",
             "|-- src/main/Main.java",

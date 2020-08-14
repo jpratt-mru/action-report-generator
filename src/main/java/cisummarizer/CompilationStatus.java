@@ -1,7 +1,7 @@
 package cisummarizer;
 
-import static java.util.stream.Collectors.toList;
 import static java.util.Comparator.comparing;
+import static java.util.stream.Collectors.toList;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -20,6 +20,16 @@ class CompilationStatus implements Status {
     problems = problemsIn(linesToParse);
   }
 
+  @Override
+  public List<Problem> problems() {
+    return new ArrayList<>(problems); // defensive copy
+  }
+
+  @Override
+  public List<String> errors() {
+    return new ArrayList<>(errors); // defensive copy
+  }
+
   //
   // Extracts all lines in the file in the given path;
   // if things blow up, returns an empty list and tosses
@@ -33,7 +43,7 @@ class CompilationStatus implements Status {
     try {
       return Files.lines(pathToFile).collect(toList());
     } catch (IOException e) {
-      errors.add(e.getMessage());
+      errors.add(e.toString());
       return List.of();
     }
   }
@@ -93,10 +103,5 @@ class CompilationStatus implements Status {
   //
   private boolean isProblem(String s) {
     return s.contains(": error:");
-  }
-
-  @Override
-  public List<Problem> problems() {
-    return new ArrayList<>(problems); // defensive copy
   }
 }

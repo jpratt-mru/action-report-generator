@@ -20,10 +20,19 @@ public class CompilationStatusTest {
   }
 
   @Test
+  @DisplayName("a status has a list of errors if the compilation result file isn't there")
+  public void should_have_list_of_errors_if_compilation_result_not_there() {
+    getStatusFor("fnoo.txt");
+
+    assertThat(status.errors()).isNotEmpty();
+  }
+
+  @Test
   @DisplayName("a status has no problems if the compilation result file is empty")
   public void should_be_0_problems_if_compilation_result_empty() throws IOException {
-    getStatusFor("empty.txt");
+    getStatusFor("no-errors.txt");
 
+    assertThat(status.errors()).isEmpty();
     assertThat(status.problems()).isEmpty();
   }
 
@@ -33,6 +42,7 @@ public class CompilationStatusTest {
   public void should_be_1_problem_if_compilation_result_shows_one_file_one_error() {
     getStatusFor("one-file-one-error.txt");
 
+    assertThat(status.errors()).isEmpty();
     assertThat(status.problems())
         .extracting(Problem::getLocation)
         .containsExactly("src/main/Main.java");
@@ -44,6 +54,7 @@ public class CompilationStatusTest {
   public void should_be_1_problem_if_compilation_result_shows_one_file_multiple_errors() {
     getStatusFor("one-file-multiple-errors.txt");
 
+    assertThat(status.errors()).isEmpty();
     assertThat(status.problems())
         .extracting(Problem::getLocation)
         .containsExactly("src/main/DrillUtil.java");
@@ -56,6 +67,7 @@ public class CompilationStatusTest {
       should_be_2_problems_in_alphabetic_order_if_compilation_result_shows_two_files_multiple_errors() {
     getStatusFor("two-files-multiple-errors.txt");
 
+    assertThat(status.errors()).isEmpty();
     assertThat(status.problems())
         .extracting(Problem::getLocation)
         .containsExactly("src/main/Main.java", "src/test/DynamicTest.java");
@@ -68,6 +80,7 @@ public class CompilationStatusTest {
       should_be_multiple_problems_in_alphabetic_order_if_compilation_result_shows_multiple_files_multiple_errors() {
     getStatusFor("multiple-files-multiple-errors.txt");
 
+    assertThat(status.errors()).isEmpty();
     assertThat(status.problems())
         .extracting(Problem::getLocation)
         .containsExactly(
