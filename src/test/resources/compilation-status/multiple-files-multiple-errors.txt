@@ -1,0 +1,28 @@
+
+src\main\DrillUtil.java:9: error: package Sysem does not exist
+    Sysem.out.println();
+         ^
+src\main\LameUtility.java:4: error: cannot find symbol
+    System.out.printn("wha?");
+              ^
+  symbol:   method printn(String)
+  location: variable out of type PrintStream
+src\main\Main.java:4: error: cannot find symbol
+    in bad_name = 3;
+    ^
+  symbol:   class in
+  location: class Main
+src\main\Main.java:11: error: package ystem does not exist
+    ystem.out.print("foo");
+         ^
+src\test\DynamicTest.java:17: error: cannot find symbol
+    return Stram.of("a", "b", "c")
+           ^
+  symbol:   variable Stram
+  location: class DynamicTest
+src\test\FooTest.java:12: error: cannot find symbol
+    Sting line1 = "Where would you like to go today? ";
+    ^
+  symbol:   class Sting
+  location: class FooTest
+6 errors

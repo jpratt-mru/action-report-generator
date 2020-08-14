@@ -1,0 +1,26 @@
+src\main\Main.java:4: error: cannot find symbol
+    in bad_name = 3;
+    ^
+  symbol:   class in
+  location: class Main
+src\test\DynamicTest.java:17: error: cannot find symbol
+    return Stram.of("a", "b", "c")
+           ^
+  symbol:   variable Stram
+  location: class DynamicTest
+2 errors
+PS C:\__eclipse_home_teacher\_____1501-my-drills\_just_vscode_project_in_eclipse> javac -d bin -cp "src/test;src/main;lib/*" src/main/*.java src/test/*.java
+src\main\Main.java:4: error: cannot find symbol
+    in bad_name = 3;
+    ^
+  symbol:   class in
+  location: class Main
+src\main\Main.java:11: error: package ystem does not exist
+    ystem.out.print("foo");
+         ^
+src\test\DynamicTest.java:17: error: cannot find symbol
+    return Stram.of("a", "b", "c")
+           ^
+  symbol:   variable Stram
+  location: class DynamicTest
+3 errors

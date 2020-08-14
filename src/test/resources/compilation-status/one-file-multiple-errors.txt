@@ -1,0 +1,7 @@
+src\main\DrillUtil.java:18: error: <identifier> expected
+  public sttic void printRiddle() {
+              ^
+src\main\DrillUtil.java:19: error: unclosed string literal
+    System.out.println("Q. What did the mermaid wash her fins with?);
+                       ^
+2 errors

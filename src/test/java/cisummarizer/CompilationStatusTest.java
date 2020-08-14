@@ -3,11 +3,8 @@ package cisummarizer;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.IOException;
-
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,31 +12,69 @@ public class CompilationStatusTest {
 
   private static final Path RESOURCE_DIR = Paths.get("src/test/resources/compilation-status");
 
+  private Status status;
+
+  void getStatusFor(String fileName) {
+    Path pathToFile = RESOURCE_DIR.resolve(fileName);
+    status = new CompilationStatus(pathToFile);
+  }
+
   @Test
-  @DisplayName("a status has no issues if the compilation result file is empty")
-  public void compilation_result_with_nothing_means_everything_ok() throws IOException {
-    Path pathToFile = RESOURCE_DIR.resolve("empty.txt");
-    Status status = new CompilationStatus(pathToFile);
+  @DisplayName("a status has no problems if the compilation result file is empty")
+  public void should_be_0_problems_if_compilation_result_empty() throws IOException {
+    getStatusFor("empty.txt");
 
     assertThat(status.problems()).isEmpty();
   }
-}
 
-interface Status {
+  @Test
+  @DisplayName(
+      "a status has 1 problem if the compilation result file shows one file with one error")
+  public void should_be_1_problem_if_compilation_result_shows_one_file_one_error() {
+    getStatusFor("one-file-one-error.txt");
 
-  List<Problem> problems();
-}
-
-interface Problem {}
-
-class CompilationStatus implements Status {
-
-  public CompilationStatus(Path pathToFile) {
-    // TODO Auto-generated constructor stub
+    assertThat(status.problems())
+        .extracting(Problem::getLocation)
+        .containsExactly("src/main/Main.java");
   }
 
-  @Override
-  public List<Problem> problems() {
-    return List.of();
+  @Test
+  @DisplayName(
+      "a status has 1 problem if the compilation result file shows one file with multiple errors")
+  public void should_be_1_problem_if_compilation_result_shows_one_file_multiple_errors() {
+    getStatusFor("one-file-multiple-errors.txt");
+
+    assertThat(status.problems())
+        .extracting(Problem::getLocation)
+        .containsExactly("src/main/DrillUtil.java");
+  }
+
+  @Test
+  @DisplayName(
+      "a status has 2 problems in alphabetic order if the compilation result file shows two files with multiple errors")
+  public void
+      should_be_2_problems_in_alphabetic_order_if_compilation_result_shows_two_files_multiple_errors() {
+    getStatusFor("two-files-multiple-errors.txt");
+
+    assertThat(status.problems())
+        .extracting(Problem::getLocation)
+        .containsExactly("src/main/Main.java", "src/test/DynamicTest.java");
+  }
+
+  @Test
+  @DisplayName(
+      "a status has multiple problems in alphabetic order if the compilation result file shows multiple files with multiple errors")
+  public void
+      should_be_multiple_problems_in_alphabetic_order_if_compilation_result_shows_multiple_files_multiple_errors() {
+    getStatusFor("multiple-files-multiple-errors.txt");
+
+    assertThat(status.problems())
+        .extracting(Problem::getLocation)
+        .containsExactly(
+            "src/main/DrillUtil.java",
+            "src/main/LameUtility.java",
+            "src/main/Main.java",
+            "src/test/DynamicTest.java",
+            "src/test/FooTest.java");
   }
 }
