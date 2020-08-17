@@ -2,8 +2,8 @@ package cisummarizer;
 
 import java.util.List;
 
-interface InterestingLines {
+interface FileValidator {
   List<String> errors();
 
-  List<String> lines();
+  List<String> content();
 }

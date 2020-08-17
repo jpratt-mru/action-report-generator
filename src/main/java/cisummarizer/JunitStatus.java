@@ -7,14 +7,14 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-class CompilationStatus implements Status {
+class JunitStatus implements Status {
 
   private List<String> errors;
   private List<Problem> problems;
 
-  public CompilationStatus(Path pathToFile) {
+  public JunitStatus(Path pathToFile) {
 
-    FileValidator lines = new TextFileValidator(pathToFile);
+    FileValidator lines = new TextFileValidator(pathToFile, this::isProblem);
 
     errors = lines.errors();
     problems = problemsIn(lines.content());
@@ -39,12 +39,7 @@ class CompilationStatus implements Status {
   //
   private List<Problem> problemsIn(List<String> linesToParse) {
     List<Problem> problems =
-        linesToParse
-            .stream()
-            .filter(this::isProblem)
-            .map(this::buildProblem)
-            .distinct()
-            .collect(toList());
+        linesToParse.stream().map(this::buildProblem).distinct().collect(toList());
 
     problems.sort(comparing(Problem::getLocation));
     return problems;

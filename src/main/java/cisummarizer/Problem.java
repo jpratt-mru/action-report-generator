@@ -9,8 +9,9 @@ package cisummarizer;
  *
  * <p>What's a type? Yeah...that's a pretty generic term. Let me elucidate via example.
  * <li>For javac, the type would just be "compilation". Terribly exciting.
- * <li>For junit, the type would be "test failure", with the location being the test class and test
- *     name involved.
+ * <li>For junit, the type could be "test failure", with the location being the test class and test
+ *     name involved. It could also be "test error" (with the location being the same as for
+ *     failure).
  * <li>For checkstyle and pmd, the type would be the name of the violation and the location would be
  *     the file where the violation occurred.
  *
@@ -21,8 +22,16 @@ class Problem {
   private String type;
   private String location;
 
+  public Problem(String type) {
+    this(type, "");
+  }
+
   public Problem(String type, String location) {
     this.type = type;
+    this.location = location;
+  }
+
+  public void setLocation(String location) {
     this.location = location;
   }
 
@@ -30,9 +39,13 @@ class Problem {
     return location;
   }
 
+  public String getType() {
+    return type;
+  }
+
   @Override
   public String toString() {
-    return String.format("[%s : %s]", type, location);
+    return String.format("{\"location\": \"%s\", \"type\": \"%s\"}", location, type);
   }
 
   @Override

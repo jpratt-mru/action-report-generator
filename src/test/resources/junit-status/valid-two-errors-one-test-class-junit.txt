@@ -1,0 +1,106 @@
+.
++-- JUnit Jupiter [OK]
+| +-- DrillUtilTest [OK]
+| | +-- when you call printTopGrosser, it should print the expected movie info [OK]
+| | +-- when you call printSpacer, it should print two newlines [OK]
+| | +-- when you call printRiddle, it should print the expected riddle with a tabbed ans... [OK]
+| | '-- when you call printPrompt, it should print the expected prompt [OK]
+| +-- MainTest [OK]
+| | +-- when you call main, it should print the expected lines [X] 
+| | |     Expecting:
+| | |      <"Where would you like to go today? 
+| | |   
+| | |     Top grossing movie of 1988: Rain Man
+| | |   
+| | |   
+| | |     Q. What did the mermaid wash her fins with?
+| | |     	A. Tide.
+| | |     foo">
+| | |     to be equal to:
+| | |      <"Where would you like to go today? 
+| | |   
+| | |     Top grossing movie of 1988: Rain Man
+| | |   
+| | |   
+| | |     Q. What did the mermaid wash her fins with?
+| | |     	A. Tide.
+| | |     foos">
+| | |     but was not.
+| | '-- not_gonna_pass_ever() [X] 
+| |       Expecting:
+| |        <true>
+| |       to be equal to:
+| |        <false>
+| |       but was not.
+| '-- FooTest [OK]
+|   '-- when you call main, it should print the expected lines [OK]
+'-- JUnit Vintage [OK]
+
+Failures (2):
+  JUnit Jupiter:MainTest:when you call main, it should print the expected lines
+    MethodSource [className = 'MainTest', methodName = 'main_should_print_expected_lines', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: 
+Expecting:
+ <"Where would you like to go today? 
+
+Top grossing movie of 1988: Rain Man
+
+
+Q. What did the mermaid wash her fins with?
+	A. Tide.
+foo">
+to be equal to:
+ <"Where would you like to go today? 
+
+Top grossing movie of 1988: Rain Man
+
+
+Q. What did the mermaid wash her fins with?
+	A. Tide.
+foos">
+but was not.
+       java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+       java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+       java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+       java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:500)
+       MainTest.main_should_print_expected_lines(MainTest.java:24)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+       java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+       java.base/java.lang.reflect.Method.invoke(Method.java:564)
+       org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:688)
+       [...]
+  JUnit Jupiter:MainTest:not_gonna_pass_ever()
+    MethodSource [className = 'MainTest', methodName = 'not_gonna_pass_ever', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: 
+Expecting:
+ <true>
+to be equal to:
+ <false>
+but was not.
+       java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+       java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+       java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+       java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:500)
+       MainTest.not_gonna_pass_ever(MainTest.java:29)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+       java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+       java.base/java.lang.reflect.Method.invoke(Method.java:564)
+       org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:688)
+       [...]
+
+Test run finished after 260 ms
+[         5 containers found      ]
+[         0 containers skipped    ]
+[         5 containers started    ]
+[         0 containers aborted    ]
+[         5 containers successful ]
+[         0 containers failed     ]
+[         7 tests found           ]
+[         0 tests skipped         ]
+[         7 tests started         ]
+[         0 tests aborted         ]
+[         5 tests successful      ]
+[         2 tests failed          ]
+
