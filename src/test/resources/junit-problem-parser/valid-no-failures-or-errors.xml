@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="drill.DrillUtilsTest" tests="16" skipped="0" failures="0" errors="0" timestamp="2020-08-17T22:20:51" hostname="LAPTOP-631HSM73" time="0.577">
+  <properties/>
+  <testcase name="middle()[1]" classname="drill.DrillUtilsTest" time="0.453"/>
+  <testcase name="middle()[2]" classname="drill.DrillUtilsTest" time="0.001"/>
+  <testcase name="middle()[3]" classname="drill.DrillUtilsTest" time="0.001"/>
+  <testcase name="starts()[1]" classname="drill.DrillUtilsTest" time="0.0"/>
+  <testcase name="starts()[2]" classname="drill.DrillUtilsTest" time="0.001"/>
+  <testcase name="starts()[3]" classname="drill.DrillUtilsTest" time="0.003"/>
+  <testcase name="ends()[1]" classname="drill.DrillUtilsTest" time="0.001"/>
+  <testcase name="ends()[2]" classname="drill.DrillUtilsTest" time="0.003"/>
+  <testcase name="ends()[3]" classname="drill.DrillUtilsTest" time="0.001"/>
+  <testcase name="watch_that_casing()[1]" classname="drill.DrillUtilsTest" time="0.002"/>
+  <testcase name="watch_that_casing()[2]" classname="drill.DrillUtilsTest" time="0.001"/>
+  <testcase name="watch_that_casing()[3]" classname="drill.DrillUtilsTest" time="0.002"/>
+  <testcase name="one_letter_accents()[1]" classname="drill.DrillUtilsTest" time="0.004"/>
+  <testcase name="one_letter_accents()[2]" classname="drill.DrillUtilsTest" time="0.001"/>
+  <testcase name="one_letter_accents()[3]" classname="drill.DrillUtilsTest" time="0.002"/>
+  <testcase name="code_coverage_hack()" classname="drill.DrillUtilsTest" time="0.005"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

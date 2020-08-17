@@ -11,9 +11,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
-public class SimplePmdParserTest {
+public class SimpleJunitErrorParserTest {
 
-  private static final Path RESOURCE_DIR = Paths.get("src/test/resources/pmd-problem-parser");
+  private static final Path RESOURCE_DIR = Paths.get("src/test/resources/junit-problem-parser");
 
   private SimpleXmlParser parser;
 
@@ -23,7 +23,7 @@ public class SimplePmdParserTest {
 
   protected void makeParserFor(String fileName) {
     Path path = RESOURCE_DIR.resolve(fileName);
-    parser = new SimplePmdParser(path);
+    parser = new SimpleJunitErrorParser(path);
   }
 
   @ParameterizedTest
@@ -44,7 +44,7 @@ public class SimplePmdParserTest {
   public void
       it_should_have_no_problems_and_no_errors_when_given_a_path_to_pmd_result_with_no_errors() {
 
-    makeParserFor("valid-no-error-pmd.xml");
+    makeParserFor("valid-no-failures-or-errors.xml");
 
     assertThat(parser.problems()).isEmpty();
     assertThat(parser.errors()).isEmpty();
@@ -52,13 +52,13 @@ public class SimplePmdParserTest {
 
   @Test
   @DisplayName(
-      "it should have one problem and no errors when given a path to a pmd result with one error")
+      "it should have one problem and no errors when given a path to a junit result with one test error")
   public void
       it_should_have_one_problem_and_no_errors_when_given_a_path_to_pmd_result_with_one_error() {
 
-    makeParserFor("valid-one-error-pmd.xml");
+    makeParserFor("valid-no-failures-one-error.xml");
 
-    assertThat(parser.problems()).extracting(Problem::getType).containsOnly("UnusedLocalVariable");
+    assertThat(parser.problems()).isEmpty();
     assertThat(parser.errors()).isEmpty();
   }
 
