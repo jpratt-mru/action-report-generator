@@ -8,7 +8,7 @@ import java.nio.file.Paths;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class CompilationStatusTest {
+public class SimpleCompilationParserTest {
 
   private static final Path RESOURCE_DIR = Paths.get("src/test/resources/compilation-status");
 
@@ -16,7 +16,7 @@ public class CompilationStatusTest {
 
   void getStatusFor(String fileName) {
     Path pathToFile = RESOURCE_DIR.resolve(fileName);
-    status = new CompilationStatus(pathToFile);
+    status = new SimpleCompilationParser(pathToFile);
   }
 
   @Test

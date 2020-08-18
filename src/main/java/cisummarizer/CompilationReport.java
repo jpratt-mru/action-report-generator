@@ -19,6 +19,12 @@ class CompilationReport implements Report {
   }
 
   @Override
+  public String allContent() {
+    String detailsAsString = String.join("\n", details());
+    return String.join("\n", header(), summary(), detailsAsString);
+  }
+
+  @Override
   public String summary() {
     if (errorsEncountered) {
       return "something bad happened:";
@@ -34,7 +40,7 @@ class CompilationReport implements Report {
   }
 
   @Override
-  public List<String> problemDescriptions() {
+  public List<String> details() {
     if (errorsEncountered) {
       Function<String, String> decorator = errorMsg -> "|-- " + errorMsg;
       return decoratedDescriptions(compilationStatus.errors(), decorator);

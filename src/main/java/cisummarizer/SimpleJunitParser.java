@@ -32,6 +32,6 @@ public abstract class SimpleJunitParser extends SimpleXmlParser {
   public String formattedType(String problemType) {
     int indexOfDisplayName = problemType.indexOf("display-name:");
     String displayName = problemType.substring(indexOfDisplayName + 14).trim();
-    return "test failure: " + displayName;
+    return String.format("test %s: %s", problemSeverity, displayName);
   }
 }

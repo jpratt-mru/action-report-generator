@@ -16,7 +16,7 @@ public class CompilationReportTest {
 
   void getReportFor(String fileName) {
     Path pathToFile = RESOURCE_DIR.resolve(fileName);
-    report = new CompilationReport(new CompilationStatus(pathToFile));
+    report = new CompilationReport(new SimpleCompilationParser(pathToFile));
   }
 
   @Test
@@ -26,7 +26,7 @@ public class CompilationReportTest {
 
     assertThat(report).hasHeader("[compilation]");
     assertThat(report.summary()).isEqualTo("something bad happened:");
-    assertThat(report.problemDescriptions())
+    assertThat(report.details())
         .containsExactly(
             "|",
             "|-- java.nio.file.NoSuchFileException: src\\test\\resources\\compilation-status\\foo.txt");
@@ -39,7 +39,7 @@ public class CompilationReportTest {
 
     assertThat(report).hasHeader("[compilation]");
     assertThat(report.summary()).isEqualTo("no compilation problems");
-    assertThat(report.problemDescriptions()).isEmpty();
+    assertThat(report.details()).isEmpty();
   }
 
   @Test
@@ -49,7 +49,7 @@ public class CompilationReportTest {
 
     assertThat(report).hasHeader("[compilation]");
     assertThat(report.summary()).isEqualTo("1 file did not compile:");
-    assertThat(report.problemDescriptions()).containsExactly("|", "|-- src/main/Main.java");
+    assertThat(report.details()).containsExactly("|", "|-- src/main/Main.java");
   }
 
   @Test
@@ -59,7 +59,7 @@ public class CompilationReportTest {
 
     assertThat(report).hasHeader("[compilation]");
     assertThat(report.summary()).isEqualTo("1 file did not compile:");
-    assertThat(report.problemDescriptions()).containsExactly("|", "|-- src/main/DrillUtil.java");
+    assertThat(report.details()).containsExactly("|", "|-- src/main/DrillUtil.java");
   }
 
   @Test
@@ -69,7 +69,7 @@ public class CompilationReportTest {
 
     assertThat(report).hasHeader("[compilation]");
     assertThat(report.summary()).isEqualTo("5 files did not compile:");
-    assertThat(report.problemDescriptions())
+    assertThat(report.details())
         .containsExactly(
             "|",
             "|-- src/main/DrillUtil.java",

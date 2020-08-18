@@ -16,5 +16,7 @@ interface Report {
 
   String summary();
 
-  List<String> problemDescriptions();
+  List<String> details();
+
+  String allContent();
 }

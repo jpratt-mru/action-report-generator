@@ -58,25 +58,7 @@ public class SimpleJunitErrorParserTest {
 
     makeParserFor("valid-no-failures-one-error.xml");
 
-    assertThat(parser.problems()).isEmpty();
-    assertThat(parser.errors()).isEmpty();
-  }
-
-  @Test
-  @DisplayName(
-      "it should return all unique problems in alphabetic order and no errors when given a path to pmd result with multiple repeated errors in different files")
-  public void
-      it_should_return_multiple_unique_ordered_no_errors_when_given_path_to_pmd_result_with_multiple_errors() {
-
-    makeParserFor("valid-multiple-errors-diff-files-pmd.xml");
-
-    assertThat(parser.problems())
-        .extracting(Problem::getType)
-        .containsOnly(
-            "ControlStatementBraces",
-            "LocalVariableNamingConventions",
-            "UnconditionalIfStatement",
-            "UnusedLocalVariable");
+    assertThat(parser.problems()).hasSize(15);
     assertThat(parser.errors()).isEmpty();
   }
 }

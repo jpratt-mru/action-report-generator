@@ -3,7 +3,9 @@ package cisummarizer;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
@@ -18,7 +20,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 
-public abstract class SimpleXmlParser {
+public abstract class SimpleXmlParser implements Status {
 
   private List<Problem> problems;
   private List<String> errors;
@@ -40,6 +42,7 @@ public abstract class SimpleXmlParser {
     }
   }
 
+  @Override
   public List<Problem> problems() {
     if (problems == null) {
       problems = parsedProblems();
@@ -47,6 +50,7 @@ public abstract class SimpleXmlParser {
     return problems;
   }
 
+  @Override
   public List<String> errors() {
     return errors;
   }
@@ -77,6 +81,7 @@ public abstract class SimpleXmlParser {
     return nodesOfInterest(locationExpression())
         .map(Node::getTextContent)
         .flatMap(location -> problemsIn(location))
+        .distinct()
         .collect(Collectors.toList());
   }
 

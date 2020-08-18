@@ -3,21 +3,23 @@ package cisummarizer;
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toList;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-class JunitStatus implements Status {
+class SimpleCompilationParser implements Status {
 
   private List<String> errors;
   private List<Problem> problems;
 
-  public JunitStatus(Path pathToFile) {
+  public SimpleCompilationParser(Path pathToFile) {
+    errors = new ArrayList<>();
+    List<String> lines = allLinesInFile(pathToFile);
 
-    FileValidator lines = new TextFileValidator(pathToFile, this::isProblem);
-
-    errors = lines.errors();
-    problems = problemsIn(lines.content());
+    problems = problemsIn(lines);
   }
 
   @Override
@@ -30,6 +32,16 @@ class JunitStatus implements Status {
     return new ArrayList<>(errors); // defensive copy
   }
 
+  private List<String> allLinesInFile(Path pathToFile) {
+
+    try {
+      return Files.lines(pathToFile).collect(toList());
+    } catch (IOException e) {
+      errors.add(e.toString());
+      return Collections.emptyList();
+    }
+  }
+
   //
   // We care about *unique* problems in a compilation run - if the
   // same file has multiple errors, we still only want to see
@@ -39,7 +51,12 @@ class JunitStatus implements Status {
   //
   private List<Problem> problemsIn(List<String> linesToParse) {
     List<Problem> problems =
-        linesToParse.stream().map(this::buildProblem).distinct().collect(toList());
+        linesToParse
+            .stream()
+            .filter(this::isProblem)
+            .map(this::buildProblem)
+            .distinct()
+            .collect(toList());
 
     problems.sort(comparing(Problem::getLocation));
     return problems;
@@ -66,8 +83,7 @@ class JunitStatus implements Status {
   private String extractedFileNameFrom(String text) {
     int indexOfLineNumber = text.indexOf(":");
     String filePath = text.substring(0, indexOfLineNumber);
-    String slashCorrectedFilePath = filePath.replace("\\", "/");
-    return slashCorrectedFilePath;
+    return filePath.replace("\\", "/");
   }
 
   //

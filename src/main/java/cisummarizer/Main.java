@@ -4,63 +4,57 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 public class Main {
 
   private static final Path REPORT_DIR = Paths.get("reports");
+  private static final Path RESULTS_DIR = Paths.get("results");
 
   public static void main(String[] args) {
-    Summarizer summarizer = new Summarizer();
 
-    System.out.println("processing result files...");
-    System.out.println("   adding summarizer for pmd...");
-    addPmd(summarizer);
-    System.out.println("   adding summarizer for checkstyle...");
-    addCheckstyle(summarizer);
-    System.out.println("   adding summarizer for junit...");
-    addJunit(summarizer);
-
-    System.out.println("generating reports...");
-    String problemNumberReport = summarizer.problemNumbers();
-    writeReport(problemNumberReport, "problem-numbers.json");
-    System.out.println("   wrote problem numbers report...");
-
-    String problemSummaryReport = summarizer.problemSummary();
-    writeReport(problemSummaryReport, "problem-summary.txt");
-    System.out.println("   wrote problem summary report...");
-
-    System.out.println("done");
+    new Main().run(args);
   }
 
-  private static void writeReport(String report, String fileName) {
+  private void run(String[] args) {
+
+    String summaryHeader = "[default header]";
+
+    if (args.length != 0) {
+      summaryHeader = args[0];
+    }
+
+    Status compilationStatus =
+        new SimpleCompilationParser(RESULTS_DIR.resolve("compilation-results.txt"));
+    Report compilationReport = new CompilationReport(compilationStatus);
+
+    Status checkstyleStatus =
+        new SimpleCheckstyleParser(RESULTS_DIR.resolve("checkstyle-results.xml"));
+    Report checkstyleReport = new CheckstyleReport(checkstyleStatus);
+
+    Status pmdStatus = new SimplePmdParser(RESULTS_DIR.resolve("pmd-results.xml"));
+    Report pmdReport = new PmdReport(pmdStatus);
+
+    Status junitStatus = new ConsolidatedJunitParser(RESULTS_DIR.resolve("junit-results.xml"));
+    Report junitReport = new JunitReport(junitStatus);
+
+    String summary =
+        String.join(
+            "\n",
+            summaryHeader,
+            compilationReport.allContent(),
+            checkstyleReport.allContent(),
+            pmdReport.allContent(),
+            junitReport.allContent());
+
+    writeReport(summary, "summary-report.txt");
+  }
+
+  private void writeReport(String report, String fileName) {
     try {
       Files.write(REPORT_DIR.resolve(fileName), report.getBytes());
     } catch (IOException e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }
-  }
-
-  private static void addJunit(Summarizer summarizer) {
-    ProblemCollector junitCollector =
-        new JunitProblemCollector(REPORT_DIR.resolve("junit-results.txt"));
-    Summary testSummary = new DetailedTestSummary(junitCollector, "junit");
-
-    summarizer.add(testSummary);
-  }
-
-  private static void addCheckstyle(Summarizer summarizer) {
-    ProblemCollector checkstyleCollector =
-        new CheckstyleProblemCollector(REPORT_DIR.resolve("checkstyle-results.xml"));
-    Summary checkstyleSummary = new PassFailSummary(checkstyleCollector, "checkstyle");
-
-    summarizer.add(checkstyleSummary);
-  }
-
-  private static void addPmd(Summarizer summarizer) {
-    ProblemCollector pmdCollector = new PmdProblemCollector(REPORT_DIR.resolve("pmd-results.xml"));
-    Summary pmdSummary = new PassFailSummary(pmdCollector, "pmd");
-
-    summarizer.add(pmdSummary);
   }
 }
