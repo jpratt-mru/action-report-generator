@@ -55,7 +55,7 @@ public class CheckstyleReportTest {
     Report report = new CheckstyleReport(mockedParser);
 
     assertThat(report).hasHeader("[checkstyle]");
-    assertThat(report.summary()).isEqualTo("1 checkstyle violation found:");
+    assertThat(report.summary()).isEqualTo("checkstyle violations found: 1");
     assertThat(report.details()).containsExactly("|", "|-- violationType");
   }
 
@@ -74,7 +74,7 @@ public class CheckstyleReportTest {
     Report report = new CheckstyleReport(mockedParser);
 
     assertThat(report).hasHeader("[checkstyle]");
-    assertThat(report.summary()).isEqualTo("2 checkstyle violations found:");
+    assertThat(report.summary()).isEqualTo("checkstyle violations found: 2");
     assertThat(report.details()).containsExactly("|", "|-- violationTypeA", "|-- violationTypeB");
   }
 
@@ -96,7 +96,7 @@ public class CheckstyleReportTest {
     Report report = new CheckstyleReport(mockedParser);
 
     assertThat(report).hasHeader("[checkstyle]");
-    assertThat(report.summary()).isEqualTo("4 checkstyle violations found:");
+    assertThat(report.summary()).isEqualTo("checkstyle violations found: 4");
     assertThat(report.details())
         .containsExactly(
             "|",

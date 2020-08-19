@@ -7,9 +7,16 @@ no checkstyle problems
 [pmd]
 no pmd problems
 
-[junit]
-no test errors
-no failing tests
+[junit errors]
+test errors found: 2
+|
+|-- [SomeClass] display name or method name
+|-- [TheOtherClass] another displayname
+
+[junit failures]
+no test failures found
+
+
 
 
 -------------

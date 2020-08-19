@@ -38,7 +38,7 @@ public class CompilationReportTest {
     getReportFor("no-errors.txt");
 
     assertThat(report).hasHeader("[compilation]");
-    assertThat(report.summary()).isEqualTo("no compilation problems");
+    assertThat(report.summary()).isEqualTo("no compilation problems found");
     assertThat(report.details()).isEmpty();
   }
 
@@ -48,7 +48,7 @@ public class CompilationReportTest {
     getReportFor("one-file-one-error.txt");
 
     assertThat(report).hasHeader("[compilation]");
-    assertThat(report.summary()).isEqualTo("1 file did not compile:");
+    assertThat(report.summary()).isEqualTo("compilation problems found: 1");
     assertThat(report.details()).containsExactly("|", "|-- src/main/Main.java");
   }
 
@@ -58,7 +58,7 @@ public class CompilationReportTest {
     getReportFor("one-file-multiple-errors.txt");
 
     assertThat(report).hasHeader("[compilation]");
-    assertThat(report.summary()).isEqualTo("1 file did not compile:");
+    assertThat(report.summary()).isEqualTo("compilation problems found: 1");
     assertThat(report.details()).containsExactly("|", "|-- src/main/DrillUtil.java");
   }
 
@@ -68,7 +68,7 @@ public class CompilationReportTest {
     getReportFor("multiple-files-multiple-errors.txt");
 
     assertThat(report).hasHeader("[compilation]");
-    assertThat(report.summary()).isEqualTo("5 files did not compile:");
+    assertThat(report.summary()).isEqualTo("compilation problems found: 5");
     assertThat(report.details())
         .containsExactly(
             "|",
