@@ -7,11 +7,13 @@ package cisummarizer;
  * <p>Currently, I think I only care about the location of a problem (what file it occurred in) and
  * the type of problem.
  *
- * <p>What's a type? Yeah...that's a pretty generic term. Let me elucidate via example.
+ * <p>What's a type? Yeah...that's a pretty generic term. Let me elucidate via example:
  * <li>For javac, the type would just be "compilation". Terribly exciting.
  * <li>For junit, the type could be "test failure", with the location being the test class and test
  *     name involved. It could also be "test error" (with the location being the same as for
- *     failure).
+ *     failure). I kind of actually cheat here - forced into a corner by the format of xml files
+ *     that junit5 generates - the location is just the name of the test class, while the type is a
+ *     combination of "test blah:" and name_of_failing_or_errord_test)
  * <li>For checkstyle and pmd, the type would be the name of the violation and the location would be
  *     the file where the violation occurred.
  *
@@ -28,10 +30,6 @@ class Problem {
 
   public Problem(String type, String location) {
     this.type = type;
-    this.location = location;
-  }
-
-  public void setLocation(String location) {
     this.location = location;
   }
 

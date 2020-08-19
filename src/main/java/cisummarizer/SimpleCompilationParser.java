@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-class SimpleCompilationParser implements Status {
+class SimpleCompilationParser implements Parser {
 
   private List<String> errors;
   private List<Problem> problems;
@@ -50,7 +50,7 @@ class SimpleCompilationParser implements Status {
   // Problems should be in alphabetic order.
   //
   private List<Problem> problemsIn(List<String> linesToParse) {
-    List<Problem> problems =
+    List<Problem> theProbs =
         linesToParse
             .stream()
             .filter(this::isProblem)
@@ -58,8 +58,8 @@ class SimpleCompilationParser implements Status {
             .distinct()
             .collect(toList());
 
-    problems.sort(comparing(Problem::getLocation));
-    return problems;
+    theProbs.sort(comparing(Problem::getLocation));
+    return theProbs;
   }
 
   private Problem buildProblem(String text) {

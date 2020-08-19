@@ -18,7 +18,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 
-public abstract class SimpleXmlParser implements Status {
+public abstract class SimpleXmlParser implements Parser {
 
   private List<Problem> problems;
   private List<String> errors;
@@ -36,7 +36,6 @@ public abstract class SimpleXmlParser implements Status {
 
     if (!validRoot()) {
       errors.add(String.format("not a %s file", parserType));
-      return;
     }
   }
 
@@ -78,7 +77,7 @@ public abstract class SimpleXmlParser implements Status {
 
     return nodesOfInterest(locationExpression())
         .map(Node::getTextContent)
-        .flatMap(location -> problemsIn(location))
+        .flatMap(this::problemsIn)
         .distinct()
         .collect(Collectors.toList());
   }
@@ -110,8 +109,7 @@ public abstract class SimpleXmlParser implements Status {
   private Document xmlDocumentCreatedFrom(Path path) {
     try {
       DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-      Document xmlDocument = builder.parse(path.toUri().toString());
-      return xmlDocument;
+      return builder.parse(path.toUri().toString());
     } catch (ParserConfigurationException | SAXException | IOException e) {
       errors.add(e.toString());
       return null;

@@ -17,29 +17,25 @@ import java.util.function.Function;
  */
 abstract class Report {
 
-  private Status status;
+  private Parser parser;
   private int numProblems;
   private boolean errorsEncountered;
   private List<Problem> orderedProblems;
-  private String reportType = "checkstyle";
-  private String nameForProblems = "violations";
-  Function<Problem, String> ofInterest = Problem::getType;
+  private String reportType;
 
-  public Report(
-      Status status,
-      String reportType,
-      String nameForProblems,
-      Function<Problem, String> ofInterest) {
-    this.status = status;
-    numProblems = status.problems().size();
-    errorsEncountered = !status.errors().isEmpty();
+  public Report(Parser parser, String reportType) {
+    this.parser = parser;
     this.reportType = reportType;
-    this.nameForProblems = nameForProblems;
-    this.ofInterest = ofInterest;
+    numProblems = parser.problems().size();
+    errorsEncountered = !parser.errors().isEmpty();
 
-    orderedProblems = new ArrayList<>(status.problems());
-    orderedProblems.sort(comparing(ofInterest));
+    orderedProblems = new ArrayList<>(parser.problems());
+    orderedProblems.sort(comparing(toDisplay()));
   }
+
+  abstract String nameForProblems();
+
+  abstract Function<Problem, String> toDisplay();
 
   public String header() {
     return String.format("[%s]", reportType);
@@ -49,20 +45,20 @@ abstract class Report {
     if (errorsEncountered) {
       return "something bad happened:";
     } else if (numProblems == 0) {
-      return String.format("no %s %s found", reportType, nameForProblems);
+      return String.format("no %s %s found", reportType, nameForProblems());
     } else {
-      return String.format("%s %s found: %d", reportType, nameForProblems, numProblems);
+      return String.format("%s %s found: %d", reportType, nameForProblems(), numProblems);
     }
   }
 
   public List<String> details() {
     if (errorsEncountered) {
       Function<String, String> decorator = errorMsg -> "|-- " + errorMsg;
-      return decoratedDescriptions(status.errors(), decorator);
+      return decoratedDescriptions(parser.errors(), decorator);
     } else if (numProblems == 0) {
       return List.of();
     } else {
-      Function<Problem, String> decorator = problem -> "|-- " + ofInterest.apply(problem);
+      Function<Problem, String> decorator = problem -> "|-- " + toDisplay().apply(problem);
       return decoratedDescriptions(orderedProblems, decorator);
     }
   }

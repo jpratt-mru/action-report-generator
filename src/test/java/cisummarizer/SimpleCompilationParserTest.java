@@ -12,7 +12,7 @@ public class SimpleCompilationParserTest {
 
   private static final Path RESOURCE_DIR = Paths.get("src/test/resources/compilation-status");
 
-  private Status status;
+  private Parser status;
 
   void getStatusFor(String fileName) {
     Path pathToFile = RESOURCE_DIR.resolve(fileName);

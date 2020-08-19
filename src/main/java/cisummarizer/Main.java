@@ -23,19 +23,24 @@ public class Main {
       summaryHeader = args[0];
     }
 
-    Status compilationStatus =
+    SimpleCompilationParser compilationParser =
         new SimpleCompilationParser(RESULTS_DIR.resolve("compilation-results.txt"));
-    Report compilationReport = new CompilationReport(compilationStatus);
+    Report compilationReport = new CompilationReport(compilationParser);
 
-    Status checkstyleStatus =
+    SimpleCheckstyleParser checkstyleParser =
         new SimpleCheckstyleParser(RESULTS_DIR.resolve("checkstyle-results.xml"));
-    Report checkstyleReport = new CheckstyleReport(checkstyleStatus);
+    Report checkstyleReport = new CheckstyleReport(checkstyleParser);
 
-    Status pmdStatus = new SimplePmdParser(RESULTS_DIR.resolve("pmd-results.xml"));
-    Report pmdReport = new PmdReport(pmdStatus);
+    SimplePmdParser pmdParser = new SimplePmdParser(RESULTS_DIR.resolve("pmd-results.xml"));
+    Report pmdReport = new PmdReport(pmdParser);
 
-    Status junitStatus = new ConsolidatedJunitParser(RESULTS_DIR.resolve("junit-results.xml"));
-    Report junitReport = new JunitReport(junitStatus);
+    SimpleJunitErrorParser junitErrorParser =
+        new SimpleJunitErrorParser(RESULTS_DIR.resolve("junit-results.xml"));
+    Report junitErrorReport = new JunitErrorReport(junitErrorParser);
+
+    SimpleJunitFailureParser junitFailureParser =
+        new SimpleJunitFailureParser(RESULTS_DIR.resolve("junit-results.xml"));
+    Report junitFailureReport = new JunitFailureReport(junitFailureParser);
 
     String summary =
         String.join(
@@ -44,7 +49,8 @@ public class Main {
             compilationReport.allContent(),
             checkstyleReport.allContent(),
             pmdReport.allContent(),
-            junitReport.allContent());
+            junitErrorReport.allContent(),
+            junitFailureReport.allContent());
 
     writeReport(summary, "summary-report.txt");
   }
