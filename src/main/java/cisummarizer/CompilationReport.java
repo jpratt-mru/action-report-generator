@@ -49,7 +49,7 @@ public class CompilationReport extends Report {
   }
 
   @Override
-  Function<Problem, String> toDisplay() {
+  Function<Problem, String> problemAsString() {
     return Problem::getLocation;
   }
 }

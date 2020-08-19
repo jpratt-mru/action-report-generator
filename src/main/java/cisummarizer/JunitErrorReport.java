@@ -59,7 +59,7 @@ public class JunitErrorReport extends Report {
    * </pre>
    */
   @Override
-  Function<Problem, String> toDisplay() {
+  Function<Problem, String> problemAsString() {
     return problem ->
         String.format(
             "[%s] %s", problem.getLocation(), problem.getType().replace("test error: ", ""));

@@ -49,7 +49,7 @@ public class CheckstyleReport extends Report {
   }
 
   @Override
-  Function<Problem, String> toDisplay() {
+  Function<Problem, String> problemAsString() {
     return Problem::getType;
   }
 }

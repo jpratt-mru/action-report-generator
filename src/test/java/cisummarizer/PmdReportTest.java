@@ -16,7 +16,7 @@ public class PmdReportTest {
   @DisplayName("when there's an error with the pmd status, the report shows that")
   public void when_status_has_error_report_shows_that() {
 
-    SimpleCheckstyleParser mockedParser = mock(SimpleCheckstyleParser.class);
+    SimplePmdParser mockedParser = mock(SimplePmdParser.class);
     when(mockedParser.errors()).thenReturn(List.of("foo"));
 
     Report report = new PmdReport(mockedParser);
@@ -30,7 +30,7 @@ public class PmdReportTest {
   @DisplayName("when there's no errors and no problems in the pmd status, the report shows that")
   public void when_status_has_no_errors_and_no_problems_report_shows_that() {
 
-    SimpleCheckstyleParser mockedParser = mock(SimpleCheckstyleParser.class);
+    SimplePmdParser mockedParser = mock(SimplePmdParser.class);
     when(mockedParser.errors()).thenReturn(List.of());
     when(mockedParser.problems()).thenReturn(List.of());
 
@@ -45,7 +45,7 @@ public class PmdReportTest {
   @DisplayName("when there's no errors and one problem in the pmd status, the report shows that")
   public void when_status_has_no_errors_and_one_problem_report_shows_that() {
 
-    SimpleCheckstyleParser mockedParser = mock(SimpleCheckstyleParser.class);
+    SimplePmdParser mockedParser = mock(SimplePmdParser.class);
     when(mockedParser.errors()).thenReturn(List.of());
     when(mockedParser.problems())
         .thenReturn(List.of(new Problem("violationType", "violationLocation")));
@@ -61,7 +61,7 @@ public class PmdReportTest {
   @DisplayName("when there's no errors and two problems in alphabetic order, the report shows that")
   public void when_status_has_no_errors_and_two_problems_in_order_report_shows_that() {
 
-    SimpleCheckstyleParser mockedParser = mock(SimpleCheckstyleParser.class);
+    SimplePmdParser mockedParser = mock(SimplePmdParser.class);
     when(mockedParser.errors()).thenReturn(List.of());
     when(mockedParser.problems())
         .thenReturn(
@@ -78,10 +78,31 @@ public class PmdReportTest {
 
   @Test
   @DisplayName(
+      "when there's no errors and two problems of the same type but different locations, the report shows only one")
+  public void
+      when_status_has_no_errors_and_two_problems_with_same_type_but_different_locations_report_shows_one() {
+
+    SimplePmdParser mockedParser = mock(SimplePmdParser.class);
+    when(mockedParser.errors()).thenReturn(List.of());
+    when(mockedParser.problems())
+        .thenReturn(
+            List.of(
+                new Problem("violationTypeA", "violationLocationA"),
+                new Problem("violationTypeA", "violationLocationB")));
+
+    Report report = new PmdReport(mockedParser);
+
+    assertThat(report).hasHeader("[pmd]");
+    assertThat(report.summary()).isEqualTo("pmd violations found: 1");
+    assertThat(report.details()).containsExactly("|", "|-- violationTypeA");
+  }
+
+  @Test
+  @DisplayName(
       "when there's no errors and multiple problems out of order, the report lists them in order")
   public void when_status_has_no_errors_and_multiple_out_of_order_problems_report_show_in_order() {
 
-    SimpleCheckstyleParser mockedParser = mock(SimpleCheckstyleParser.class);
+    SimplePmdParser mockedParser = mock(SimplePmdParser.class);
     when(mockedParser.errors()).thenReturn(List.of());
     when(mockedParser.problems())
         .thenReturn(

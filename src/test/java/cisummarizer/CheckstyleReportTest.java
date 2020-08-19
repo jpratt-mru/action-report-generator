@@ -80,6 +80,27 @@ public class CheckstyleReportTest {
 
   @Test
   @DisplayName(
+      "when there's no errors and two problems of the same type but different locations, the report shows only one")
+  public void
+      when_status_has_no_errors_and_two_problems_with_same_type_but_different_locations_report_shows_one() {
+
+    SimpleCheckstyleParser mockedParser = mock(SimpleCheckstyleParser.class);
+    when(mockedParser.errors()).thenReturn(List.of());
+    when(mockedParser.problems())
+        .thenReturn(
+            List.of(
+                new Problem("violationTypeA", "violationLocationA"),
+                new Problem("violationTypeA", "violationLocationB")));
+
+    Report report = new CheckstyleReport(mockedParser);
+
+    assertThat(report).hasHeader("[checkstyle]");
+    assertThat(report.summary()).isEqualTo("checkstyle violations found: 1");
+    assertThat(report.details()).containsExactly("|", "|-- violationTypeA");
+  }
+
+  @Test
+  @DisplayName(
       "when there's no errors and multiple problems out of order, the report lists them in order")
   public void when_status_has_no_errors_and_multiple_out_of_order_problems_report_show_in_order() {
 
